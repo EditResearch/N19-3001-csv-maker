@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall -Wextra -pedantic -std=c18 -O3
+CFLAGS=-Wall -Wextra -pedantic -std=c18 -O3 -static
 TEST_CFLAGS=-Wall -Wextra -pedantic -std=c18 -Isrc
 LIBS=-lsnap7
 TARGET=csv_maker
@@ -21,7 +21,11 @@ main.o: app/main.c
 
 test: prepare $(TEST_MODULES)
 	$(CC) $(TEST_CFLAGS) $(TEST_MODULES) $(LIBS) -o $(BUILD)/autotest
-	$(BUILD)/autotest	
+	$(BUILD)/autotest
+
+
+exec:
+	$(BUILD)/$(TARGET)
 
 
 prepare:
@@ -31,6 +35,3 @@ prepare:
 clean:
 	rm -rfv $(BUILD)
 	rm -vf *.o
-
-
-	
